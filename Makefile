@@ -20,6 +20,7 @@ ARCH_FLAGS = -mcpu=$(MCU) -mthumb -mfpu=$(FPU) -mfloat-abi=$(FLOAT_ABI)
 # Project Folder Structure
 APP_INIT      = App_Init
 APP_TASKS     = App_Tasks
+UART_HANDLER  = UART_Handler
 DRIVERS_DIR   = Drivers
 CORE_DIR      = Core
 FREERTOS_DIR  = FreeRTOS_Kernel
@@ -48,7 +49,8 @@ endif
 # Source Directories
 APP_SRCS = \
 $(wildcard $(APP_INIT)/*.c) \
-$(wildcard $(APP_TASKS)/*.c)
+$(wildcard $(APP_TASKS)/*.c) \
+$(wildcard $(UART_HANDLER)/*.c)
 
 DRIVER_SRCS = \
 $(foreach d,$(wildcard $(DRIVERS_DIR)/*),$(wildcard $(d)/*.c))
@@ -81,6 +83,7 @@ $(patsubst %.s,$(BUILD_DIR)/%.o,$(STARTUP_SRC))
 INCLUDES = \
 -I$(APP_INIT) \
 -I$(APP_TASKS) \
+-I$(UART_HANDLER) \
 -I$(CORE_DIR)/System \
 -I$(CORE_DIR)/ISR \
 -I$(FREERTOS_DIR) \
