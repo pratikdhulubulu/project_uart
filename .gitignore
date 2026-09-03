@@ -6,3 +6,4 @@ Build/
 *.lst
 *.o
 *.d
+.vscode/
