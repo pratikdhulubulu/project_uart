@@ -11,7 +11,10 @@
 #include "gpio_driver.h"
 #include "uart_handler.h"
 
-static unsigned char character = 0x0;
+#define INITIAL_CHARACTER 0x0
+#define DELAY_200_MS 200
+
+static unsigned char character = INITIAL_CHARACTER;
 
 void osInit(void)
 {
@@ -31,7 +34,7 @@ void Task1(void *pvParameters)
     {
         uartWriteTxBuffer(character);
         character++;
-        vTaskDelay(pdMS_TO_TICKS(200));
+        vTaskDelay(pdMS_TO_TICKS(DELAY_200_MS));
     }
 }
 
@@ -42,6 +45,6 @@ void Task2(void *pvParameters)
     while (1)
     {
         uartWriteBytes();
-        vTaskDelay(pdMS_TO_TICKS(200));
+        vTaskDelay(pdMS_TO_TICKS(DELAY_200_MS));
     }
 }
